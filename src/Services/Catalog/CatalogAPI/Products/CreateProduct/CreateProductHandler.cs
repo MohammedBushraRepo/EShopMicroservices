@@ -7,7 +7,9 @@ namespace CatalogAPI.Products.CreateProduct
         : ICommand<CreateProductResult>;
 
     public record CreateProductResult(Guid Id);
-    internal class CreateProductCommandHandler (IDocumentSession session)
+
+
+    internal class CreateProductCommandHandler (IDocumentSession session) //Inject Martin document Database 
         : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
@@ -23,6 +25,7 @@ namespace CatalogAPI.Products.CreateProduct
                 ImageFile = command.ImageFile,
                 Price = command.Price
             };
+
             //save to database 
             session.Store(product);
             await session.SaveChangesAsync(cancellationToken);
