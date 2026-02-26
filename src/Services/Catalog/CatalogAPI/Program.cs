@@ -1,5 +1,7 @@
 
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // here register service
@@ -10,7 +12,8 @@ builder.Services.AddMediatR(config =>
     //register all service into this project intpo mediator class library
     config.RegisterServicesFromAssembly(assembly);
     //register the pipline behavior 
-    config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    config.AddOpenBehavior(typeof(ValidationBehavior<,>)); // executed first 
+    config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 
 builder.Services.AddValidatorsFromAssembly(assembly);

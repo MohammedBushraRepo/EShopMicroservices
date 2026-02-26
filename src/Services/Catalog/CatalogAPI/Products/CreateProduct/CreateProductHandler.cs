@@ -23,7 +23,7 @@ namespace CatalogAPI.Products.CreateProduct
     }
 
 
-    internal class CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger) //Inject Martin document Database 
+    internal class CreateProductCommandHandler(IDocumentSession session) //Inject Martin document Database 
         : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
