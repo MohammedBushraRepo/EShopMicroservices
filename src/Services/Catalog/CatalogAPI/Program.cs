@@ -1,8 +1,8 @@
-using BuildingBlocs.Behaviors;
-using FluentValidation;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
+// here register service
 
 var assembly = typeof(Program).Assembly;
 builder.Services.AddMediatR(config =>
@@ -22,10 +22,10 @@ builder.Services.AddMarten(opts =>
 
 }).UseLightweightSessions();// using this option to perform thwe crud operations 
 
-
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 var app = builder.Build();
 
 // Configure the HTTP request pipline.
 app.MapCarter(); // with this line when initalize the project will scan all ICarter and map the endpoints 
-
+app.UseExceptionHandler(options => { });
 app.Run();
