@@ -1,7 +1,4 @@
 
-
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // here register service
@@ -24,6 +21,8 @@ builder.Services.AddMarten(opts =>
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);
 
 }).UseLightweightSessions();// using this option to perform thwe crud operations 
+if (builder.Environment.IsDevelopment())
+    builder.Services.InitializeMartenWith<CatalogInitialData>();
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 var app = builder.Build();
