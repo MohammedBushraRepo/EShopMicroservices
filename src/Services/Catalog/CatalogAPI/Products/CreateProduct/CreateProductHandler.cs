@@ -23,13 +23,15 @@ namespace CatalogAPI.Products.CreateProduct
     }
 
 
-    internal class CreateProductCommandHandler(IDocumentSession session, IValidator<CreateProductCommand> validator) //Inject Martin document Database 
+    internal class CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger) //Inject Martin document Database 
         : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
 
-            // left it for 
+            // left it for Pipline Behavior 
+
+
             // var result = await validator.ValidateAsync(command, cancellationToken);
             // var errors = result.Errors.Select(x => x.ErrorMessage).ToList();
             // if (errors.Any())
