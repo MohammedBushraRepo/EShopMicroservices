@@ -7,3 +7,5 @@ global using BuildingBlocs.Behaviors;
 global using Marten;
 global using BuildingBlocs.Exceptions.Handler;
 global using BuildingBlocs.Exceptions;
+global using Basket.API.Data;
+global using BuildingBlocs.CQRS;

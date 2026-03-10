@@ -21,6 +21,11 @@ builder.Services.AddMarten(opts =>
     //opts.AutoCreateSchemaObjects
 }).UseLightweightSessions();
 
+//DI registeration 
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+
+//Register the custom exception handler 
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 // Configure the HTTP request pipeline.
 
@@ -28,4 +33,6 @@ var app = builder.Build();
 
 
 app.MapCarter();
+app.UseExceptionHandler(options => { });
 app.Run();
+

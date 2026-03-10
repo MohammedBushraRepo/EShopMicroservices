@@ -1,6 +1,4 @@
-﻿using Basket.API.Models;
-using BuildingBlocs.CQRS;
-using FluentValidation;
+﻿
 
 namespace Basket.API.Basket.StoreBasket
 {
@@ -16,17 +14,18 @@ namespace Basket.API.Basket.StoreBasket
             RuleFor(x => x.Cart.UserName).NotEmpty().WithMessage("UserName Is required ");
         }
     }
-    public class StoreBasketHandler
+    public class StoreBasketHandler(IBasketRepository repository)
         : ICommandHandler<StoreBasketCommand, StoreBasketResult>
     {
         public async Task<StoreBasketResult> Handle(StoreBasketCommand command, CancellationToken cancellationToken)
         {
-            ShoppingCart cart = command.Cart;
+            //ShoppingCart cart = command.Cart;
 
             //TODO: store in database - use marten upsert - if exist = update , if 
-            //TODO: update cache 
+            //TODO: update cache
+            await repository.StoreBasket(command.Cart, cancellationToken);
 
-            return new StoreBasketResult("swn");
+            return new StoreBasketResult(command.Cart.UserName);
         }
     }
 }
