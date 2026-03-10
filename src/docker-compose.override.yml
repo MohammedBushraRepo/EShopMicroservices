@@ -12,7 +12,7 @@ services:
       - postgres_catalog:/var/lib/postgresql/data/ 
 
   basketdb:
-    container_name: catalogdb
+    container_name: basketdb
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
