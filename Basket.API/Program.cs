@@ -14,9 +14,18 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 
-var app = builder.Build();
+builder.Services.AddMarten(opts =>
+{
+    opts.Connection(builder.Configuration.GetConnectionString("Database")!);
+    opts.Schema.For<ShoppingCart>().Identity(x => x.UserName);
+    //opts.AutoCreateSchemaObjects
+}).UseLightweightSessions();
+
 
 // Configure the HTTP request pipeline.
+
+var app = builder.Build();
+
 
 app.MapCarter();
 app.Run();
