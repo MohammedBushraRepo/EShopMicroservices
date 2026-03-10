@@ -1,4 +1,4 @@
-namespace BuildingBlocks.Exceptions;
+namespace BuildingBlocs.Exceptions;
 
 public class InternalServerException : Exception
 {

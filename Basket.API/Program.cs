@@ -1,14 +1,22 @@
+using BuildingBlocks.Behaviors;
+using BuildingBlocs.Behaviors;
+using Carter;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+var assembly = typeof(Program).Assembly;
+builder.Services.AddCarter();
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssemblies(assembly);
+    config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    config.AddOpenBehavior(typeof(LoggingBehavior<,>));
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-
+app.MapCarter();
 app.Run();
