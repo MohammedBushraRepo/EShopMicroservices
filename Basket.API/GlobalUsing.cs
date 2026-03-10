@@ -6,3 +6,4 @@ global using FluentValidation;
 global using BuildingBlocs.Behaviors;
 global using Marten;
 global using BuildingBlocs.Exceptions.Handler;
+global using BuildingBlocs.Exceptions;
