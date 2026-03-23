@@ -7,6 +7,9 @@ services:
     image: postgres:17
     platform: linux/amd64
 
+  distributedcache:
+    image: redis
+
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
